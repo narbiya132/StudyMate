@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyMate | Smart Student Planner</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            StudyMate
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/add">Add Task</a>
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="hero">
+
+            <div>
+                <h1>Smart Student Planner</h1>
+
+                <p>
+                    Manage your academic tasks and discover what
+                    you should focus on next.
+                </p>
+            </div>
+
+            <a class="add-button" href="/add">
+                + Add Task
+            </a>
+
+        </section>
+
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>Total Tasks</h3>
+                <strong>{{ total }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <strong>{{ pending }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completed</h3>
+                <strong>{{ completed }}</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>High Priority</h3>
+                <strong>{{ high_priority }}</strong>
+            </div>
+
+        </section>
+
+
+        <section class="recommendation">
+
+            <div class="recommendation-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>Smart Recommendation</h2>
+
+                <h3>
+                    {{ recommendation.subject }}
+                </h3>
+
+                {% if recommendation.task %}
+
+                    <p>
+                        <strong>Focus on:</strong>
+                        {{ recommendation.task }}
+                    </p>
+
+                    <p class="reason">
+                        {{ recommendation.reason }}
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        {{ recommendation.reason }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <section class="tasks-section">
+
+            <div class="section-header">
+
+                <h2>Your Tasks</h2>
+
+                <a href="/add">
+                    Add New
+                </a>
+
+            </div>
+
+
+            {% if recent_tasks %}
+
+            <div class="task-list">
+
+                {% for task in recent_tasks %}
+
+                <div class="task-card">
+
+                    <div class="task-info">
+
+                        <h3>
+                            {{ task["title"] }}
+                        </h3>
+
+                        <p>
+                            {{ task["subject"] }}
+                        </p>
+
+                        {% if task["description"] %}
+
+                        <small>
+                            {{ task["description"] }}
+                        </small>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="task-details">
+
+                        <span class="deadline">
+                            📅 {{ task["deadline"] }}
+                        </span>
+
+
+                        <span class="priority {{ task['priority']|lower }}">
+                            {{ task["priority"] }}
+                        </span>
+
+
+                        {% if task["status"] == "Completed" %}
+
+                            <span class="completed">
+                                ✓ Completed
+                            </span>
+
+                        {% else %}
+
+                            <a class="complete-button"
+                               href="/complete/{{ task['id'] }}">
+                                Mark Complete
+                            </a>
+
+                            <a class="delete-button"
+                               href="/delete/{{ task['id'] }}">
+                                Delete
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>No tasks yet</h3>
+
+                <p>
+                    Add your first academic task to get started.
+                </p>
+
+                <a class="add-button" href="/add">
+                    Add Your First Task
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

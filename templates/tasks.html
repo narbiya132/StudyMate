@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Task | StudyMate</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            StudyMate
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+        </div>
+
+    </nav>
+
+
+    <main class="form-container">
+
+        <div class="form-card">
+
+            <h1>Add Academic Task</h1>
+
+            <p>
+                Add your academic task below.
+            </p>
+
+            <form method="POST">
+
+                <label for="title">
+                    Task Name
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Example: Python Assignment"
+                    required
+                >
+
+
+                <label for="subject">
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Example: Python"
+                    required
+                >
+
+
+                <label for="deadline">
+                    Deadline
+                </label>
+
+                <input
+                    type="date"
+                    id="deadline"
+                    name="deadline"
+                    required
+                >
+
+
+                <label for="priority">
+                    Priority
+                </label>
+
+                <select id="priority" name="priority">
+
+                    <option value="High">
+                        High
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Low">
+                        Low
+                    </option>
+
+                </select>
+
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    placeholder="Describe the task..."
+                ></textarea>
+
+
+                <button type="submit">
+                    Add Task
+                </button>
+
+                <a class="cancel" href="/">
+                    ← Back to Dashboard
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
